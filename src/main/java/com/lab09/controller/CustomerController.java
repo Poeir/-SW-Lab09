@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.lab09.model.Customer;
+import com.lab09.dto.CustomerRequest;
 import com.lab09.dto.CustomerResponse;
 import com.lab09.service.WebCustomerService;
 
@@ -43,6 +44,28 @@ public class CustomerController {
 		CustomerResponse customer = customerService.getCustomerById(id).block(); //Mon<Author>.block()->Author
 		model.addAttribute("customer", customer);
 		return "detailCustomer";
+	}
+	
+	@GetMapping("/web/createcustomer") // Enter a new Author
+	public String createAuthor(Model model) {
+		Customer customer = new Customer();
+		model.addAttribute("customer", customer);
+		return "addCustomerForm";
+	}
+	
+	//POST new customer
+	@PostMapping("/web/addcustomer") // save the inputed new author
+	public String addAuthor(@ModelAttribute CustomerRequest customerRequest, 
+			Model model) {
+		System.out.println("add a new author");
+		
+		// ต้องมีตัวแปรมารับ Mono<Author> ก่อน
+		Mono<CustomerResponse> monoCustomer = customerService.createCustomer(customerRequest);
+		// ต้องเพิ่ม model ด้วยหลังจากสร้าง new Author ใหม่ เพราะถ้าไม่สร้างจะไม่แสดงใน
+		// "authorListCRUD"
+
+		model.addAttribute("customer", monoCustomer.block());
+		return "redirect:/web/customers";
 	}
 	
 	

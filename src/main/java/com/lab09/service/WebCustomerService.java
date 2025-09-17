@@ -39,14 +39,14 @@ public class WebCustomerService {
             System.out.println("Sending Author: " + cus);
 
             return webClient.post()
-                    .uri("/authors")
+                    .uri("")
                     .body(Mono.just(cus), CustomerResponse.class)
                     .retrieve()
                     .onStatus(HttpStatusCode::is4xxClientError, clientResponse -> 
                         Mono.error(
-                                new RuntimeException("Client error during createAuthor")))
+                                new RuntimeException("Client error during createCustomer")))
                     .onStatus(HttpStatusCode::is5xxServerError, clientResponse -> 
-                        Mono.error(new RuntimeException("Server error during createAuthor")))
+                        Mono.error(new RuntimeException("Server error during createCustomer")))
                     .bodyToMono(CustomerResponse.class)
                     .doOnNext(response ->
                           System.out.println("Response received: " + response))

@@ -48,7 +48,7 @@ public class CustomerController {
 	
 	@GetMapping("/web/createcustomer") // Enter a new Author
 	public String createAuthor(Model model) {
-		Customer customer = new Customer();
+		CustomerResponse  customer = new CustomerResponse(null, null, null);
 		model.addAttribute("customer", customer);
 		return "addCustomerForm";
 	}

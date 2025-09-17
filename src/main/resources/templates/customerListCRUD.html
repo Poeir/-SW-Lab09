@@ -1,32 +1,139 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-xmlns:th="http://www.thymealeaf.org">
+      xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>Show Cities</title>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link th:href="@{/styles/cssandjs/main.css}" rel="stylesheet" />
+  <title>Show Customers</title>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link th:href="@{/styles/cssandjs/main.css}" rel="stylesheet" />
+
+  <style>
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: #f9f9f9;
+      margin: 20px;
+      color: #333;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #444;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .btn-add {
+      background: #4CAF50;
+      color: white;
+    }
+    .btn-add:hover {
+      background: #45a049;
+    }
+
+    .btn-view {
+      background: #2196F3;
+      color: white;
+    }
+    .btn-view:hover {
+      background: #1976D2;
+    }
+
+    .btn-edit {
+      background: #FF9800;
+      color: white;
+    }
+    .btn-edit:hover {
+      background: #F57C00;
+    }
+
+    .btn-delete {
+      background: #F44336;
+      color: white;
+    }
+    .btn-delete:hover {
+      background: #D32F2F;
+    }
+
+    .table-container {
+      width: 80%;
+      margin: 0 auto;
+    }
+
+    .top-action {
+      text-align: right;
+      margin-bottom: 15px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      box-shadow: 0px 2px 6px rgba(0,0,0,0.1);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    th, td {
+      padding: 12px 15px;
+      text-align: left;
+    }
+
+    th {
+      background: #4CAF50;
+      color: white;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    tr:nth-child(even) {
+      background: #f2f2f2;
+    }
+
+    tr:hover {
+      background: #e6f7ff;
+      transition: 0.2s;
+    }
+
+    .action-buttons a {
+      margin-right: 5px;
+    }
+  </style>
 </head>
 <body>
-<h2>List of customers</h2>
-<table>
-<tr>
-<th>Id</th>
-<th>Name</th>
-<th>Email</th>
-</tr>
-<tr th:each = "customer:${customers}">
-<td th:text="${customer.id}"></td>
-<td th:text="${customer.name}"></td>
-<td th:text="${customer.email}"></td>
-<td>
-     <a th:href="@{'/web/createcustomer'}">Add</a> |
-     <a th:href="@{'/web/customers/' + ${customer.id}}">View</a> |
-    <a th:href="@{'/web/editcustomer/' + ${customer.id}}">Edit</a> |
-    <a th:href="@{'/web/deletecustomer/' + ${customer.id}}">Delete</a>
-  </td>
-</tr>
-</table>
+  <h2>List of Customers</h2>
+  <div class="table-container">
+    <div class="top-action">
+      <a class="btn btn-add" th:href="@{'/web/createcustomer'}">+ Add Customer</a>
+    </div>
+    <table>
+      <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Actions</th>
+      </tr>
+      <tr th:each="customer : ${customers}">
+        <td th:text="${customer.id}"></td>
+        <td th:text="${customer.name}"></td>
+        <td th:text="${customer.email}"></td>
+        <td class="action-buttons">
+          <a class="btn btn-view" th:href="@{'/web/customers/' + ${customer.id}}">View</a>
+          <a class="btn btn-edit" th:href="@{'/web/editcustomer/' + ${customer.id}}">Edit</a>
+          <a class="btn btn-delete" th:href="@{'/web/deletecustomer/' + ${customer.id}}">Delete</a>
+        </td>
+      </tr>
+    </table>
+  </div>
 </body>
 </html>

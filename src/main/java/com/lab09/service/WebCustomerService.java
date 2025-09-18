@@ -61,11 +61,10 @@ public class WebCustomerService {
                     .bodyValue(cus).retrieve().bodyToMono(CustomerResponse.class);
         }
 
-       
         public Mono<Void> deleteCustomerById(Long id) {
             //System.out.println("deleting an author having id ="+id);
             return webClient.delete()
-                    .uri("/authors/{id}", id)
+                    .uri("/{id}", id)
                     .retrieve()
                     .bodyToMono(Void.class);
         }

@@ -1,13 +1,67 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-xmlns:th="http://www.thymealeaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymealeaf.org">
 <head>
-<meta charset="UTF-8">
-<link th:href="@{/styles/cssandjs/main.css}" rel="stylesheet" />
-<title>Home page</title>
+    <meta charset="UTF-8">
+    <title>Customer Information System</title>
+    <style>
+        /* General body styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7f6;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+        }
+
+        /* Container for content */
+        .container {
+            background-color: #fff;
+            padding: 40px 60px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Heading style */
+        h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        /* Link button style */
+        .button {
+            display: inline-block;
+            padding: 12px 24px;
+            margin-top: 20px;
+            font-size: 1.1em;
+            color: #fff;
+            background-color: #3498db;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .button:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        .button:active {
+            transform: translateY(0);
+        }
+    </style>
 </head>
 <body>
-<h1> Customer Information system. </h1>
-<a href="/web/customers">Customer Form</a><br>
+<div class="container">
+    <h1>Customer Information System</h1>
+    <a href="/web/customers" class="button">Go to Customer Form</a>
+</div>
 </body>
 </html>

@@ -85,6 +85,15 @@ public class CustomerController {
 		model.addAttribute("customer", monoCustomer.block());
 		return "redirect:/web/customers";
 	}
-	
+
+    @GetMapping("/web/deletecustomer/{id}") // delete
+    public String deleteCustomer(@PathVariable Long id) {
+        // การลบ ควรหาตัวมารับ เพราะใน Service มีสองแบบ คือตัวเดี่ยว ๆ ใช้ Mono
+        // ถ้าเป็นกลุ่มใช้ Flux การแปลง จาก Mono เป็น instance ของคลาสใด ๆ ใช้ block()
+        customerService.deleteCustomerById(id).block();
+        //  model.addAttribute("author",monoDeletedAuthor.block());
+        return "redirect:/web/customers";
+
+    }
 	
 }

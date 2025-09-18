@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.lab09.model.Customer;
-import com.cp.kku.kku.demo.model.Author;
 import com.lab09.dto.CustomerRequest;
 import com.lab09.dto.CustomerResponse;
 import com.lab09.service.WebCustomerService;
@@ -80,15 +79,12 @@ public class CustomerController {
 		return "editCustomerForm";
 	}
 
-//	@PostMapping("/web/updateauthor/{id}") // Edit, save the edited author
-//	public String updateAuthor(@PathVariable Long id,
-//			@ModelAttribute Author authorRequest, Model model) {
-//
-//		Mono<Author> monoAuthor = authorService.updateAuthor(id,
-//											authorRequest);
-//		model.addAttribute("author", monoAuthor.block());
-//		return "redirect:/web/authors";
-//	}
+	@PostMapping("/web/updatecustomer/{id}") // Edit, save the edited author
+	public String updateCustomer(@PathVariable Long id, @ModelAttribute CustomerRequest customerRequest, Model model) {
+		Mono<CustomerResponse> monoCustomer = customerService.updateCustomer(id,customerRequest);
+		model.addAttribute("customer", monoCustomer.block());
+		return "redirect:/web/customers";
+	}
 	
 	
 }

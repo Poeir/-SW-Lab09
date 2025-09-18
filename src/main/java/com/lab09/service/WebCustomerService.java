@@ -25,7 +25,7 @@ public class WebCustomerService {
      //get request 
      public Flux<CustomerResponse> getAllCustomers() {// List<Author>
             return webClient.get()
-                    .uri("") 
+                    .uri("")
                     .retrieve()
                     .bodyToFlux(CustomerResponse.class) ;
         }
@@ -56,8 +56,8 @@ public class WebCustomerService {
 
 
         public Mono<CustomerResponse> updateCustomer(Long id, CustomerRequest cus) {
-            System.out.println("Edited Author "+ cus.toString());
-            return webClient.put().uri("/authors/"+id)
+            System.out.println("Edited customer "+ cus.toString());
+            return webClient.put().uri("/"+id)
                     .bodyValue(cus).retrieve().bodyToMono(CustomerResponse.class);
         }
 

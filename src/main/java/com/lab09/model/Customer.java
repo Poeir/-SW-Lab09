@@ -1,13 +1,7 @@
 package com.lab09.model;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-
+import jakarta.persistence.*;
 @Entity
 @Table(name="customer")
 
@@ -19,6 +13,16 @@ public class Customer {
 	private String name;
 	@Column
 	private String email;
+	
+	@OneToOne(mappedBy = "customer",
+			cascade = CascadeType.ALL,
+			orphanRemoval = true,
+			fetch = FetchType.LAZY)
+	private Address address;
+	
+	
+
+
 	//===== Constructor ===== 
 	public Customer() {}
 	public Customer(Long id , String name ,String email) {
@@ -38,6 +42,22 @@ public class Customer {
 	public void setName(String name) {this.name = name;}
 	
 
+	public Address getAddress() {
+		return address;
+	}
+	public void setAddress(Address address) {
+	    if (address == null) {
+	        // กรณี assign ค่า null → ต้องตัดความสัมพันธ์เดิม
+	        if (this.address != null) 
+	            this.address.setCustomer(null);  // ตัด customer ออกจาก address เดิม
+	        this.address = null;                 // clear ค่าใน customer เอง
+	    } else {
+	        // กรณี assign address ใหม่
+	        address.setCustomer(this);           // ตั้งค่าฝั่ง Address ให้ชี้มาที่ Customer
+	        this.address = address;              // ตั้งค่าฝั่ง Customer ให้ชี้มาที่ Address
+	    }
+	}
+	
 	@Override
 	public String toString() {
 		return "Customer [id=" + id + ", name=" + name + ", email=" + email + "]";
